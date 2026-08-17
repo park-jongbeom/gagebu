@@ -1,0 +1,24 @@
+{% extends "ledger/기본.html" %}
+{% block 제목 %}기준금리 그래프{% endblock %}
+{% block 본문 %}
+<h2>기준금리 흐름</h2>
+<canvas id="그래프"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/axios@1/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+    async function 그린다(){
+        const 답 = await axios.get("/api/수집/");
+        const 날짜들 = [];
+        const 값들 = [];
+        답.data.forEach(function(건){
+            날짜들.push(건.날짜);
+            값들.push(건.값);
+        });
+        new Chart(document.getElementById("그래프"),{
+            type: "line",
+            data: {labels: 날짜들, datasets: [{label: "기준금리", data: 값들}]}
+        });
+    }
+    그린다();
+</script>
+{% endblock %}

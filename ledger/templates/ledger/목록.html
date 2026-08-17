@@ -1,0 +1,42 @@
+{% extends "ledger/기본.html" %}
+{% load humanize %}
+{% block 제목 %}내역 목록{% endblock %}
+{% block 본문 %}
+<h2>내역 목록</h2>
+<form method="get">
+    <input name="검색어" value="{{ 검색어 }}">
+    <select name="분류">
+        <option value="">전체</option>
+        <option value="수입" {% if 분류 == "수입" %}selected{% endif %}>수입</option>
+        <option value="지출" {% if 분류 == "지출" %}selected{% endif %}>지출</option>
+    </select>
+    <button>찾기</button>
+</form>
+<p><a href="/add/">내역 추가</a></p>
+<table>
+    <p>모두 {{ 쪽.paginator.count }}건, 합계 {{ 합계|default:0|intcomma }}원</p>
+    <p><a href="/stats/">통계 보기</p>
+    {% for 건 in 쪽 %}
+    <tr>
+        <td>{{ forloop.counter}}</td>
+        <td>{{ 건.날짜 }}</td>
+        <td>{{ 건.분류 }}</td>
+        <td><a href="/detail/{{ 건.id }}/">{{ 건.항목 }}</a></td>
+        <td>{{ 건.주인.username }}</td>
+        <td>{{ 건.금액|intcomma }}원</td>
+        <td>{% if 건.분류 == "지출" and 건.금액 > 1000000 %}큰 지출{% endif %}</td>
+        <td>{{ 건.이름 }}</td>
+        <td>{{ 건.계좌 }}</td>
+        <td><a href="/edit/{{ 건.id }}">수정</a></td>
+        <td><a href="/delete/{{ 건.id }}">삭제</a></td>
+    </tr>
+    {% empty %}
+    <tr><td>내역이 없습니다</td></tr>
+    {% endfor %}
+</table>
+<div>
+    {% if 쪽.has_previous %}<a href="?검색어={{ 검색어 }}&page={{ 쪽.previous_page_number }}">이전</a>{% endif %}
+    <span>{{ 쪽.number }} / {{ 쪽.paginator.num_pages }}</span>
+    {% if 쪽.has_next %}<a href="?검색어={{ 검색어 }}&page={{ 쪽.next_page_number }}">다음</a>{% endif %}
+</div>
+{% endblock %}

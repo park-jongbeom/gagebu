@@ -1,0 +1,31 @@
+{
+    // 이 프로젝트는 venv 안의 파이썬을 쓴다 (django, rest_framework 등이 여기 설치돼 있음)
+    "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ],
+
+    "python.terminal.activateEnvironment": false,
+
+    // 기본 문법 자동완성(IntelliSense)은 켜기 - 키워드, 메서드 이름 등 팝업 제안
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    },
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.wordBasedSuggestions": "matchingDocuments",
+    "editor.parameterHints.enabled": true,
+
+    // AI 추론 코드 생성(인라인 고스트 텍스트)만 비활성화
+    "editor.inlineSuggest.enabled": false,
+
+    // HTML 태그 자동 닫기, 괄호/따옴표 자동 닫기, Emmet 모두 켜기
+    "html.autoClosingTags": true,
+    "html.suggest.html5": true,
+    "editor.autoClosingBrackets": "always",
+    "editor.autoClosingQuotes": "always",
+    "emmet.showExpandedAbbreviation": "always",
+    "emmet.showSuggestionsAsSnippets": true
+}

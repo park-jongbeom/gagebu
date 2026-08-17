@@ -1,0 +1,15 @@
+{% extends "ledger/기본.html" %}
+{% load static %}
+{% block 제목 %}항목 분류{% endblock %}
+{% block 본문 %}
+<h2>항목 분류</h2>
+<input id="항목칸" placeholder="점심 김치찌개">
+<button id="물어보기">물어보기</button>
+<p id="로딩"></p>
+<p id="결과"></p>
+<hr>
+<input type="file" id="그림칸" accept="image/*">
+<button id="알아보기">숫자 알아보기</button>
+<script src="https://cdn.jsdelivr.net/npm/axios@1/dist/axios.min.js"></script>
+<script src="{% static 'ledger/예측.js' %}"></script>
+{% endblock %}

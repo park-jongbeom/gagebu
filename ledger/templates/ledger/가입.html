@@ -1,0 +1,10 @@
+{% extends "ledger/기본.html" %}
+{% block 제목 %}회원 가입{% endblock %}
+{% block 본문 %}
+<h2>회원 가입</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ 폼.as_p }}
+    <button>가입</button>
+</form>
+{% endblock %}

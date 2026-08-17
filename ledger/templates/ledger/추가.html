@@ -1,0 +1,10 @@
+{% extends "ledger/기본.html" %}
+{% block 제목 %}내역 추가{% endblock %}
+{% block 본문 %}
+<h2>내역 추가</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ 폼.as_p }}
+    <button>저장</button>
+</form>
+{% endblock %}

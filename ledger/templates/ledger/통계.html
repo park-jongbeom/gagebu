@@ -1,0 +1,19 @@
+{% extends "ledger/기본.html" %}
+{% load humanize %}
+{% block 제목 %}통계{% endblock %}
+{% block 본문 %}
+<h2>통계</h2>
+<p>전체 합계 {{ 전체|default:0|intcomma}}원</p>
+<h3>분류별</h3>
+<table>
+    {% for 행 in 분류별 %}
+    <tr><td>{{ 행.분류 }}</td><td>{{ 행.합계|intcomma }}원</td><td>{{ 행.건수 }}건</td></tr>
+    {% endfor %}
+</table>
+<h3>월별</h3>
+<table>
+    {% for 행 in 월별 %}
+    <tr><td>{{ 행.달|date:"Y년 n월" }}</td><td>{{ 행.합계|intcomma }}원</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

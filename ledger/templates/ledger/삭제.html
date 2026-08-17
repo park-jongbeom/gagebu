@@ -1,0 +1,11 @@
+{% extends "ledger/기본.html" %}
+{% block 제목 %}내역 삭제{% endblock %}
+{% block 본문 %}
+<h2>정말 지우시겠습니까</h2>
+<p>{{ 건.날짜 }} / {{ 건.항목 }} / {{ 건.금액 }}원</p>
+<form method="post">
+    {% csrf_token %}
+    <button>네, 지웁니다</button>
+</form>
+<p><a href="/list/">아니요, 돌아갑니다</a></p>
+{% endblock %}

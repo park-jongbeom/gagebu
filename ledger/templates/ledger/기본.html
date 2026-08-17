@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block 제목 %}가계부{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'ledger/style.css' %}">
+</head>
+<body>
+    <h1>나의 가계부</h1>
+    <p>
+        {% if user.is_authenticated %}
+            {{ user.username }}님 <a href="/logout/">로그아웃</a>
+        {% else %}
+            <a href="/login/">로그인</a>
+            <a href="/signup/">회원가입</a>
+        {% endif %}    
+    </p>
+    {% block 본문 %}{% endblock %}
+</body>
+</html>
