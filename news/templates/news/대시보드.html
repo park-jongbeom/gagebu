@@ -1,0 +1,49 @@
+{% extends "ledger/기본.html" %}
+{% block 제목 %}금융 뉴스 대시보드{% endblock %}
+{% block 본문 %}
+<h2>금융 뉴스 대시보드</h2>
+<p>오늘의 시장 분위기</p>
+<div style="width: 300px"><canvas id="차트"></canvas></div>
+<ul id="목록"></ul>
+<script src="https://cdn.jsdelivr.net/npm/axios@1/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+const 색들 = { "긍정": "#2563eb", "부정": "#dc2626", "중립": "#9ca3af" };
+
+async function 그린다() {
+  const 답 = await axios.get("/api/감성통계/");
+  const 이름들 = [];
+  const 건수들 = [];
+  const 칠들 = [];
+  답.data.forEach(function (줄) {
+    이름들.push(줄.감성);
+    건수들.push(줄.건수);
+    칠들.push(색들[줄.감성]);
+  });
+  new Chart(document.getElementById("차트"), {
+    type: "doughnut",
+    data: { labels: 이름들, datasets: [{ data: 건수들, backgroundColor: 칠들 }] }
+  });
+}
+
+async function 채운다() {
+  const 답 = await axios.get("/api/뉴스/");
+  const 목록 = document.getElementById("목록");
+  답.data.forEach(function (기사) {
+    const 줄 = document.createElement("li");
+    const 고리 = document.createElement("a");
+    고리.href = 기사.링크;
+    고리.textContent = 기사.제목;
+    const 배지 = document.createElement("b");
+    배지.textContent = " " + 기사.감성 + " " + 기사.신뢰도;
+    배지.style.color = 색들[기사.감성];
+    줄.appendChild(고리);
+    줄.appendChild(배지);
+    목록.appendChild(줄);
+  });
+}
+
+그린다();
+채운다();
+</script>
+{% endblock %}
