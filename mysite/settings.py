@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "corsheaders",
     "rest_framework",
+    "news",
 ]
 
 MIDDLEWARE = [
