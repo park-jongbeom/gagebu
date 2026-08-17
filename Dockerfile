@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 EXPOSE 8000
-CMD [ "gunicorn", "mysite.wsgi", "-d", "0.0.0.0:8000", "-w", "2" ]
+CMD [ "gunicorn", "mysite.wsgi", "-b", "0.0.0.0:8000", "-w", "2" ]

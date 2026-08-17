@@ -103,6 +103,8 @@ if os.getenv("DB주소"):
 if os.getenv("서버주소"):
     ALLOWED_HOSTS.append(os.getenv("서버주소"))
 
+DEBUG = os.getenv("DEBUG") == "True"
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
@@ -141,6 +143,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 # Email
